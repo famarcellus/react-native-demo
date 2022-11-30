@@ -4,7 +4,7 @@ const bodyTypeSize = 18;
 const inputPadding = bodyTypeSize * 0.8;
 const btnHorizontalPad = bodyTypeSize * 1.33;
 const mainColor = "#297bff";
-const semiBoldText = 600;
+const semiBoldText = "600";
 
 export default StyleSheet.create({
     primaryTextColor: {
@@ -38,7 +38,8 @@ export default StyleSheet.create({
         paddingHorizontal: btnHorizontalPad,
         display: "flex",
         alignItems: "center",
-        borderRadius: 4
+        borderRadius: 4,
+        minWidth: "100%"
     },
     primaryBtn: {
         backgroundColor: mainColor,
@@ -52,7 +53,7 @@ export default StyleSheet.create({
     },
     buttonLabel: {
         fontSize: bodyTypeSize * 1.2,
-        fontWeight: semiBoldText
+        fontWeight: semiBoldText,
     },
     whiteText: {
         color: "white"

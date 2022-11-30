@@ -1,4 +1,5 @@
 import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import commonStyle from "../style/common.style";
 
@@ -17,8 +18,8 @@ export const AppButton = (props) => {
     }
 
     return (
-        <TouchableOpacity style={[...buttonStyles, { marginTop: 10, width: "100%" }]}>
-            <Text style={[...textStyles]}>{props.btnText}</Text>
+        <TouchableOpacity onPress={() => {props?.onPress ? props.onPress() : ""}} style={[...buttonStyles, { marginTop: 10, width: "100%" }]}>
+            <Text style={[...textStyles]}>{props.loading ? <ActivityIndicator size="small" color="#ffffff" style={{ width: 30, height: 30 }}/> : props.btnText}</Text>
         </TouchableOpacity>
     )
 }

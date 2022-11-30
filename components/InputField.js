@@ -5,8 +5,6 @@ import commonStyle from "../style/common.style";
 
 const InputField = (props) => {
 
-    const [inputValue, onChangeInputValue] = useState("");
-
     return (
         <View>
             <Text style={commonStyle.inputLabel}>{props.label}</Text>
@@ -17,8 +15,8 @@ const InputField = (props) => {
             placeholderTextColor="#a8a8a8"
             keyboardType={props?.keyboardType}
             secureTextEntry={props?.secureTextEntry}
-            value={inputValue}
-            onChangeText={onChangeInputValue}
+            value={props.state}
+            onChangeText={props.onChangeState}
             />
         </View>
     )
