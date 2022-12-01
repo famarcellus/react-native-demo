@@ -1,7 +1,8 @@
-import { createMachine } from "xstate";
+import { createMachine, interpret } from "xstate";
+import { useInterpret } from "@xstate/react";
 
 
-export const LogInMachine = () => createMachine({
+export const LogInMachine = createMachine({
     predictableActionArguments: true,
     id: "login",
     initial: "loggedOut",
@@ -16,3 +17,7 @@ export const LogInMachine = () => createMachine({
         loggedIn: {}
     }
 });
+
+export const logInService = interpret(LogInMachine)
+logInService.start();
+

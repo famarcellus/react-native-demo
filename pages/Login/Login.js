@@ -1,9 +1,8 @@
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useActor } from '@xstate/react';
 
-
-import { LoggedInContext } from '../../LoggedInContext';
+import { logInService } from '../../LogInMachine';
 import InputField from '../../components/InputField';
 import { AppButton } from '../../components/AppButton';
 import commonStyle from '../../style/common.style';
@@ -12,7 +11,7 @@ import commonStyle from '../../style/common.style';
 export const Login = () => {
 
     const validate = () => {
-        const valid = (validEmailState && validPasswordState && !state.matches("loggedIn"));
+        const valid = (validEmailState && validPasswordState && !loggedInState.matches("loggedIn"));
 
         if(valid) {
             send("LOADING");
@@ -38,8 +37,7 @@ export const Login = () => {
         }
     }
 
-    const globalState = useContext(LoggedInContext);
-    const [state, send] = useActor(globalState);
+    const [loggedInState, send] = useActor(logInService);
     const [emailState, onEmailChange] = useState("");
     const [validEmailState, setValidEmailState] = useState("");
     const [passwordState, onPasswordChange] = useState("");
@@ -54,7 +52,7 @@ export const Login = () => {
                 </Text>
             </View>
             <View style={{display: "flex", alignItems: "center"}}>
-                <Text style={[styles.welcomeText, styles.h2Text, !state.matches("loggedIn") ? { opacity: 0} : ""]}>Welcome!</Text>
+                <Text style={[styles.welcomeText, styles.h2Text, !loggedInState.matches("loggedIn") ? { opacity: 0} : ""]}>Welcome!</Text>
                 <Text style={[styles.h2Text, { color: "red", fontSize: 19, fontWeight: "600" }, incorrectInfoState ? { opacity: 1 } : { opacity: 0 }]}>Incorrect email or password.</Text>
             </View>
             <View style={commonStyle.form}>
@@ -80,8 +78,8 @@ export const Login = () => {
                 />
                 <AppButton 
                 btnType="primary"
-                btnText={state.matches("loggedIn") ? "Logged In" : "Log In"}
-                loading={state.matches("loading")}
+                btnText={loggedInState.matches("loggedIn") ? "Logged In" : "Log In"}
+                loading={loggedInState.matches("loading")}
                 onPress={() => validate()}
                 />
                 <Text style={{ marginTop: 25 }}>Don't Have An Account Yet?</Text>
@@ -118,5 +116,4 @@ const styles = StyleSheet.create({
         fontSize: 31.10 
     }
          
-
 });
