@@ -1,7 +1,6 @@
-import { useActor } from "@xstate/react";
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
-import { LoggedInContext } from "../LoggedInContext";
+
 
 import commonStyle from "../style/common.style";
 

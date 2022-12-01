@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { useActor } from '@xstate/react';
 
-import { logInService } from '../../LogInMachine';
+import { logInService } from '../../machines/LogInMachine';
 import InputField from '../../components/InputField';
 import { AppButton } from '../../components/AppButton';
 import commonStyle from '../../style/common.style';
