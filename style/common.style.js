@@ -61,7 +61,6 @@ export default StyleSheet.create({
     input: {
         fontSize: bodyTypeSize,
         marginTop: 5,
-        marginBottom: 25,
         paddingVertical: inputPadding,
         paddingHorizontal: inputPadding,
         minWidth: "100%",
