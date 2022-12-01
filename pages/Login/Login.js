@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useActor } from '@xstate/react';
 
 import { logInService } from '../../machines/LogInMachine';
@@ -15,20 +15,20 @@ export const Login = () => {
 
         if(valid) {
             send("LOADING");
-            const validPassRegex = String(passwordState).match(
+            const isCorrectPattern = String(passwordState).match(
                 /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
             );
 
-            if(validPassRegex) {
+            if(isCorrectPattern) {
                 setTimeout(() => {
                     send("LOGIN");
-                    setIncorrectInfoState(!validPassRegex);
+                    setIncorrectInfoState(!isCorrectPattern);
                 }, 1800);
             }
-            if(!validPassRegex) {
+            if(!isCorrectPattern) {
                 setTimeout(() => {
                     send("LOGOUT");
-                    setIncorrectInfoState(!validPassRegex);
+                    setIncorrectInfoState(!isCorrectPattern);
                 }, 1000);
             }
         }
@@ -39,10 +39,12 @@ export const Login = () => {
 
     const [loggedInState, send] = useActor(logInService);
     const [emailState, onEmailChange] = useState("");
-    const [validEmailState, setValidEmailState] = useState("");
+    const [validEmailState, setValidEmailState] = useState(true);
     const [passwordState, onPasswordChange] = useState("");
-    const [validPasswordState, setValidPasswordState] = useState("");
+    const [validPasswordState, setValidPasswordState] = useState(true);
     const [incorrectInfoState, setIncorrectInfoState] = useState(false);
+
+    const secondInputRef = useRef();
 
     return (
         <>
@@ -65,8 +67,11 @@ export const Login = () => {
                     onInputChange={onEmailChange}
                     validState={validEmailState}
                     onChangeValidity={setValidEmailState}
+                    onSubmitEditing={() => { secondInputRef.current.focus() }}
+                    blurOnSubmit={false}
                 />
                  <InputField 
+                    ref={secondInputRef}
                     label="Password"
                     autoFocus={false}
                     placeholder="Password"
@@ -75,6 +80,8 @@ export const Login = () => {
                     onInputChange={onPasswordChange}
                     validState={validPasswordState}
                     onChangeValidity={setValidPasswordState}
+                    onSubmitEditing={() => { validate() } }
+                    blurOnSubmit={true}
                 />
                 <AppButton 
                 btnType="primary"
@@ -92,7 +99,6 @@ export const Login = () => {
         </>
     );
 }
-
 
 const styles = StyleSheet.create({
     headerContainer: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 
@@ -14,7 +14,7 @@ import commonStyle from "../style/common.style";
 //     };
 // }
 
-const InputField = (props) => {
+const InputField = React.forwardRef((props, ref) => {
 
     function validateInput(value) {
         if(props.label == "Email") {
@@ -41,27 +41,34 @@ const InputField = (props) => {
         props.onChangeValidity(bool);
     }
 
-    const isValid = (props?.validState === false);
+    useEffect(() => {
+        if(props.label == "Password" && props.inputState) {
+            validateInput(props.inputState);
+        } 
+    }, [props.inputState])
 
     return (
         <View>
             <Text style={commonStyle.inputLabel}>{props.label}</Text>
             <TextInput
+            ref={ref}
             autoFocus={props.autoFocus}
-            style={[commonStyle.input, isValid ? styles.errorBorder : ""]}
+            style={[commonStyle.input, !props.validState ? styles.errorBorder : ""]}
             placeholder={props.placeholder}
             placeholderTextColor="#a8a8a8"
             keyboardType={props?.keyboardType}
             secureTextEntry={props?.secureTextEntry}
             value={props.inputState}
             onChangeText={props.onInputChange}
+            onSubmitEditing={props.onSubmitEditing}
+            blurOnSubmit={props.blurOnSubmit}
             onBlur={() => validateInput(props.inputState)}
             />
-            {props.label == "Email" && <Text style={[styles.inlineError, isValid ? { opacity: 1 } : ""]}>Please enter a valid email.</Text> }
-            {props.label == "Password" && <Text style={[styles.inlineError, isValid ? { opacity: 1 } : ""]}>Please enter your password.</Text> }
+            {props.label == "Email" && <Text style={[styles.inlineError, !props.validState ? { opacity: 1 } : ""]}>Please enter a valid email.</Text> }
+            {props.label == "Password" && <Text style={[styles.inlineError, !props.validState? { opacity: 1 } : ""]}>Please enter your password.</Text> }
         </View>
     )
-}
+});
 
 
 const styles = StyleSheet.create({
