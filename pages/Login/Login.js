@@ -54,8 +54,8 @@ export const Login = () => {
                 </Text>
             </View>
             <View style={{display: "flex", alignItems: "center"}}>
-                <Text style={[styles.welcomeText, styles.h2Text, !loggedInState.matches("loggedIn") ? { opacity: 0} : ""]}>Welcome!</Text>
-                <Text style={[styles.h2Text, { color: "red", fontSize: 19, fontWeight: "600" }, incorrectInfoState ? { opacity: 1 } : { opacity: 0 }]}>Incorrect email or password.</Text>
+                <Text style={[styles.welcomeText, commonStyle.h2Text, !loggedInState.matches("loggedIn") ? { opacity: 0} : ""]}>Welcome!</Text>
+                <Text style={[{ color: "red", fontSize: 18, fontWeight: "600" }, incorrectInfoState ? { opacity: 1 } : { opacity: 0 }]}>Incorrect email or password.</Text>
             </View>
             <View style={commonStyle.form}>
                 <InputField 
@@ -117,9 +117,5 @@ const styles = StyleSheet.create({
         fontWeight: "500", 
         marginTop: 55, 
     },
-
-    h2Text: {
-        fontSize: 31.10 
-    }
          
 });

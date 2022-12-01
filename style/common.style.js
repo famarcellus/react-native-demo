@@ -23,10 +23,18 @@ export default StyleSheet.create({
     semiBoldWeight: {
         fontWeight: semiBoldText
     },
+    
+    h1Text: {
+        fontSize: 37.32,
+    },
+    h2Text: {
+        fontSize: 31.10 
+    },
     inputLabel: {
         fontSize: bodyTypeSize,
         fontWeight: semiBoldText
     },
+
     form: {
         display: "flex",
         alignItems: "center", 
