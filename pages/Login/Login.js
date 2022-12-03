@@ -1,11 +1,14 @@
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useRef, useState } from 'react';
 import { useActor } from '@xstate/react';
+import commonStyle from '../../style/common.style';
 
 import { logInService } from '../../machines/LogInMachine';
-import InputField from '../../components/InputField';
-import { AppButton } from '../../components/AppButton';
-import commonStyle from '../../style/common.style';
+import { EmailField } from '../../components/InputField/EmailField';
+import { AppButton } from '../../components/AppButton/AppButton';
+import { PasswordField } from '../../components/InputField/PasswordField';
+
+
 
 
 export const Login = () => {
@@ -58,30 +61,22 @@ export const Login = () => {
                 <Text style={[{ color: "red", fontSize: 18, fontWeight: "600" }, incorrectInfoState ? { opacity: 1 } : { opacity: 0 }]}>Incorrect email or password.</Text>
             </View>
             <View style={commonStyle.form}>
-                <InputField 
-                    label="Email"
-                    autoFocus={true}
-                    placeholder="example@email.com"
-                    keyboardType="email-address"
-                    inputState={emailState}
-                    onInputChange={onEmailChange}
-                    validState={validEmailState}
-                    onChangeValidity={setValidEmailState}
-                    onSubmitEditing={() => { secondInputRef.current.focus() }}
-                    blurOnSubmit={false}
+                <EmailField 
+                autoFocus={true}
+                inputState={emailState}
+                onInputChange={onEmailChange}
+                validState={validEmailState}
+                onChangeValidity={setValidEmailState}
+                onSubmitEditing={() => { secondInputRef.current.focus() }}
+                blurOnSubmit={false}
                 />
-                 <InputField 
-                    ref={secondInputRef}
-                    label="Password"
-                    autoFocus={false}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    inputState={passwordState}
-                    onInputChange={onPasswordChange}
-                    validState={validPasswordState}
-                    onChangeValidity={setValidPasswordState}
-                    onSubmitEditing={() => { validate() } }
-                    blurOnSubmit={true}
+                <PasswordField
+                ref={secondInputRef}
+                inputState={passwordState}
+                onInputChange={onPasswordChange}
+                validState={validPasswordState}
+                onChangeValidity={setValidPasswordState}
+                onSubmitEditing={() => { validate() }}
                 />
                 <AppButton 
                 btnType="primary"

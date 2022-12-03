@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native";
 
-import commonStyle from "../style/common.style";
+import commonStyle from "../../style/common.style";
 
 export const AppButton = (props) => {
 

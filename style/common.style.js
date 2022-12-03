@@ -18,7 +18,7 @@ export default StyleSheet.create({
         paddingHorizontal: inputPadding
     },
     elementWidth: {
-        width: 250
+        width: 270
     },
     semiBoldWeight: {
         fontWeight: semiBoldText
