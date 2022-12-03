@@ -7,6 +7,8 @@ import { logInService } from '../../machines/LogInMachine';
 import { EmailField } from '../../components/InputField/EmailField';
 import { AppButton } from '../../components/AppButton/AppButton';
 import { PasswordField } from '../../components/InputField/PasswordField';
+import { PrimaryButton } from '../../components/AppButton/PrimaryButton';
+import { SecondaryButton } from '../../components/AppButton/SecondaryButton';
 
 
 
@@ -78,18 +80,26 @@ export const Login = () => {
                 onChangeValidity={setValidPasswordState}
                 onSubmitEditing={() => { validate() }}
                 />
-                <AppButton 
-                btnType="primary"
+                {/* <AppButton 
+                buttnType="primary"
                 btnText={loggedInState.matches("loggedIn") ? "Logged In" : "Log In"}
+                loading={loggedInState.matches("loading")}
+                onPress={() => validate()}
+                /> */}
+                <PrimaryButton 
+                buttonText={loggedInState.matches("loggedIn") ? "Logged In" : "Log In"}
                 loading={loggedInState.matches("loading")}
                 onPress={() => validate()}
                 />
                 <Text style={{ marginTop: 25 }}>Don't Have An Account Yet?</Text>
-                <AppButton 
+                <SecondaryButton 
+                buttonText="Sign Up"
+                />
+                {/* <AppButton 
                 btnType="secondary"
                 btnText="Sign Up"
                 onPress=""
-                />
+                /> */}
             </View>
         </>
     );
