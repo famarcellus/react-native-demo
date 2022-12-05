@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView,  View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import { Login } from "./pages/Login/Login";
-import commonStyle from './style/common.style';
+import { Login } from "./src/pages/Login/Login";
+import commonStyle from './src/style/common.style';
 
 
 
